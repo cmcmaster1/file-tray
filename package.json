@@ -1,0 +1,83 @@
+{
+  "name": "file-tray",
+  "displayName": "File Tray",
+  "publisher": "chris-mcmaster",
+  "description": "A persistent file tray for easy access to documentation files.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "fileTray",
+          "title": "File Tray",
+          "icon": "resources/icon.png"
+        }
+      ]
+    },
+    "views": {
+      "fileTray": [
+        {
+          "id": "fileTrayView",
+          "name": "File Tray"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "fileTray.addFile",
+        "title": "Add File to Tray"
+      },
+      {
+        "command": "fileTray.removeFile",
+        "title": "Remove File from Tray"
+      },
+      {
+        "command": "fileTray.copyFileContent",
+        "title": "Copy File Content"
+      }
+    ],
+    "menus": {
+      "view/item/context": [
+        {
+          "command": "fileTray.copyFileContent",
+          "when": "view == fileTrayView && viewItem == fileItem",
+          "group": "inline"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "fileTray.addFile",
+          "when": "view == fileTrayView",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.93.0",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.3.0",
+    "@typescript-eslint/parser": "^8.3.0",
+    "eslint": "^9.9.1",
+    "typescript": "^5.5.4",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1"
+  }
+}
